@@ -22,6 +22,19 @@ contract GuessTheSecretNumberChallenge {
     }
 }
 
+contract Attacker {
+
+    address payable constant MY_ROPSTEN_ACCOUNT = payable(0x5f793AbBd751f1Ac5B0F95f3C3D117E5Fd218c41);
+    uint8 constant NUMBER = 170;
+    address payable constant ADDRESSS_WHERE_CHALLENGE_CONTRACT_IS_DEPLOYED = payable(0x0);
+
+    GuessTheSecretNumberChallenge challenge = GuessTheSecretNumberChallenge(ADDRESSS_WHERE_CHALLENGE_CONTRACT_IS_DEPLOYED);
+
+    function guess() public payable {
+        challenge.guess{value: 0.1 ether}(NUMBER);
+    }
+}
+
 contract FindInput {
     bytes32 constant ANSWER_HASH = 0xdb81b4d58595fbbbb592d3661a34cdca14d7ab379441400cbfa1b78bc447c365;
     
